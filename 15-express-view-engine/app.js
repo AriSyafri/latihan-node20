@@ -8,17 +8,20 @@ app.set('view engine', 'ejs');
 
 
 app.get('/', (req, res) => {
-
-    // menggunakan sendfile
-    res.render('index');
+    res.render('index', {
+        nama: 'ari sjafri', title: 'home',
+    });
 });
 
 app.get('/about', (req, res) => {
-    res.render('about');
+    res.render('about', {
+        title: 'about'});
 });
 
 app.get('/contact', (req, res) => {
-    res.render('contact');
+    res.render('contact', {
+        title: 'contact',
+    });
 });
 
 
