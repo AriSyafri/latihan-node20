@@ -8,8 +8,26 @@ app.set('view engine', 'ejs');
 
 
 app.get('/', (req, res) => {
+
+    const mahasiswa = [
+        {
+            nama: 'Ari Syafri',
+            email: 'ari@gmail.com',
+        },
+        {
+            nama: 'Arip Sejati',
+            email: 'arip@gmail.com',
+        },
+        {
+            nama: 'Arik lukman',
+            email: 'arik@gmail.com',
+        }
+    ];
+
     res.render('index', {
-        nama: 'ari sjafri', title: 'home',
+        nama: 'ari sjafri', 
+        title: 'home',
+        mahasiswa,
     });
 });
 
