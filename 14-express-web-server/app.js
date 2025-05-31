@@ -26,6 +26,12 @@ app.get('/contact', (req, res) => {
     res.sendFile('./contact.html', {root: __dirname });
 });
 
+
+app.get('/product/:id', (req,res) => {
+    res.send(`Product ID: ${req.params.id} <br> Category ID : ${req.query.category}`);
+})
+
+
 // middleware
 app.use('/', (req, res) => {
     res.status(404);
