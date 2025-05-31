@@ -1,11 +1,13 @@
 
 const express = require('express');
+const expressLayouts = require('express-ejs-layouts');
 const app = express();
 const port = 3000;
 
 // gunakan ejs
 app.set('view engine', 'ejs');
 
+app.use(expressLayouts);
 
 app.get('/', (req, res) => {
 
@@ -25,6 +27,7 @@ app.get('/', (req, res) => {
     ];
 
     res.render('index', {
+        layout: 'layouts/main-layout',
         nama: 'ari sjafri', 
         title: 'home',
         mahasiswa,
@@ -33,17 +36,20 @@ app.get('/', (req, res) => {
 
 app.get('/about', (req, res) => {
     res.render('about', {
+        layout: 'layouts/main-layout',
         title: 'about'});
 });
 
 app.get('/contact', (req, res) => {
     res.render('contact', {
+        layout: 'layouts/main-layout',
         title: 'contact',
     });
 });
 
 
 app.get('/product/:id', (req,res) => {
+    layout: 'layouts/main-layout',
     res.send(`Product ID: ${req.params.id} <br> Category ID : ${req.query.category}`);
 })
 
