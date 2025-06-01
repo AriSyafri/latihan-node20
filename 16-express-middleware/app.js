@@ -9,16 +9,19 @@ app.set('view engine', 'ejs');
 
 app.use(expressLayouts);
 
+// Built-in middleware
+app.use(express.static('public')); 
+
 // application level middleware
 app.use((req, res, next) => {
     console.log('Time: ', Date.now());
     next();
 });
 
-app.use((req, res, next) => {
-    console.log('ini adalah middleware ke-2');
-    next();
-});
+// app.use((req, res, next) => {
+//     console.log('ini adalah middleware ke-2');
+//     next();
+// });
 
 app.get('/', (req, res) => {
 
