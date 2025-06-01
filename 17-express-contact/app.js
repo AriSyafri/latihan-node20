@@ -1,7 +1,6 @@
 
 const express = require('express');
 const expressLayouts = require('express-ejs-layouts');
-const morgan = require('morgan');
 const app = express();
 const port = 3000;
 
@@ -10,21 +9,9 @@ app.set('view engine', 'ejs');
 
 // third party middleware
 app.use(expressLayouts);
-app.use(morgan('dev'));
 
 // Built-in middleware
 app.use(express.static('public')); 
-
-// application level middleware
-app.use((req, res, next) => {
-    console.log('Time: ', Date.now());
-    next();
-});
-
-// app.use((req, res, next) => {
-//     console.log('ini adalah middleware ke-2');
-//     next();
-// });
 
 app.get('/', (req, res) => {
 
@@ -65,13 +52,6 @@ app.get('/contact', (req, res) => {
         title: 'contact',
     });
 });
-
-
-app.get('/product/:id', (req,res) => {
-    layout: 'layouts/main-layout',
-    res.send(`Product ID: ${req.params.id} <br> Category ID : ${req.query.category}`);
-})
-
 
 // middleware
 app.use('/', (req, res) => {
