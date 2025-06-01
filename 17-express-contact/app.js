@@ -38,12 +38,11 @@ app.get('/', (req, res) => {
     });
 });
 
-app.get('/about', (req, res, next) => {
+app.get('/about', (req, res) => {
     res.render('about', {
         layout: 'layouts/main-layout',
         title: 'about'}
     );
-    next();
 });
 
 app.get('/contact', (req, res) => {
