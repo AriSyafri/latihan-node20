@@ -2,7 +2,7 @@
 const express = require('express');
 const expressLayouts = require('express-ejs-layouts');
 
-const { loadContact, findContact } = require('./utils/contacts');
+const { loadContact, findContact, addContact } = require('./utils/contacts');
 
 const app = express();
 const port = 3000;
@@ -15,6 +15,7 @@ app.use(expressLayouts);
 
 // Built-in middleware
 app.use(express.static('public')); 
+app.use(express.urlencoded());
 
 app.get('/', (req, res) => {
 
@@ -56,6 +57,14 @@ app.get('/contact', (req, res) => {
         contacts,
     });
 });
+
+
+// proses data contact
+app.post('/contact', (req, res) => {
+    addContact(req.body);
+    res.redirect('/contact')
+});
+
 
 // halaman form tambah data contact
 app.get('/contact/add', (req, res) => {
