@@ -13,14 +13,18 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>0884848</td>
-                    <td>
-                        <a href="" class="btn btn-success badge rounded-pill"> <i class="bi bi-info-circle"></i> Detail</a>
-                    </td>
-                  </tr>
+                  <% contacts.forEach((contact, i) => { i++ %>
+                    <tr>
+                      <th scope="row"><%= i++ %></th>
+                      <td><%= contact.nama %></td>
+                      <td><%= contact.noHp %></td>
+                      <td>
+                          <a href="/contact/<%= contact.nama %>" class="btn btn-success badge rounded-pill"> <i class="bi bi-info-circle"></i> Detail</a>
+                      </td>
+                    </tr>
+                  <% }) %>
+                  
+                 
                 </tbody>
               </table>
         </div>

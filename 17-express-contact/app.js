@@ -50,10 +50,10 @@ app.get('/about', (req, res) => {
 
 app.get('/contact', (req, res) => {
     const contacts = loadContact();
-    console.log(contacts);
     res.render('contact', {
         layout: 'layouts/main-layout',
         title: 'contact',
+        contacts,
     });
 });
 
