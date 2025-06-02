@@ -59,11 +59,13 @@ app.get('/contact', (req, res) => {
 
 
 app.get('/contact/:nama', (req, res) => {
+    const nama = req.params.nama;
     const contact = findContact(req.params.nama);
     res.render('detail', {
         title: 'Halaman Detail Contact',
         layout: 'layouts/main-layout',
         contact,
+        nama,
     });
 
 });
