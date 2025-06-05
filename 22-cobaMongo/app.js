@@ -1,5 +1,5 @@
 
-const { MongoClient } = require("mongodb");
+const { MongoClient, ObjectId } = require("mongodb");
 const uri = 'mongodb://127.0.0.1:27017';
 const dbName = 'ngodom';
 
@@ -22,16 +22,56 @@ client.connect((error, client) => {
     const db = client.db(dbName);
 
     // menambahkan 1 data ke collection mahasiswa
-    db.collection('mahasiswa').insertOne(
-        {
-            nama: 'Ari Rusdi',
-            email: 'erik@gmail.com'
-        },
-        (error, result) => {
-            if(error) {
-                return console.log('gagal menambahkan data');
-            }
+    // db.collection('mahasiswa').insertOne(
+    //     {
+    //         nama: 'Ari Rusdi',
+    //         email: 'erik@gmail.com'
+    //     },
+    //     (error, result) => {
+    //         if(error) {
+    //             return console.log('gagal menambahkan data');
+    //         }
+    //         console.log(result);
+    //     });
 
+    // menambah lebih dari satu data
+    // db.collection('mahasiswa').insertMany([
+    //     {
+    //         nama: 'eris',
+    //         email: 'eris@gmail.com'
+    //     },
+    //     {
+    //         nama: 'sylph',
+    //         email: 'avip@gmail.com'
+    //     },
+    // ],
+    // (error, result) => {
+    //     if (error) {
+    //         return console.log('data gagal ditambahkan');
+    //     }
+    //     console.log(result);
+    // }
+    // );
+
+    // menampilkan data collection / tabel
+    // console.log(
+    //     db
+    //     .collection('mahasiswa')
+    //     .find()
+    //     .toArray((error, result) => {
+    //         console.log(result);
+    //     })
+    // );
+
+    // menampilkan data berdasarkan kriteria
+    console.log(
+        db
+        .collection('mahasiswa')
+        // .find({ nama: 'eris'})
+        .find({ _id: ObjectId('6841d71df08627512836ee66') })
+        .toArray((error, result) => {
             console.log(result);
-        });
+        })
+    );
+
 });
