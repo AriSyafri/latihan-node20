@@ -64,14 +64,28 @@ client.connect((error, client) => {
     // );
 
     // menampilkan data berdasarkan kriteria
-    console.log(
-        db
-        .collection('mahasiswa')
-        // .find({ nama: 'eris'})
-        .find({ _id: ObjectId('6841d71df08627512836ee66') })
-        .toArray((error, result) => {
-            console.log(result);
-        })
+    // console.log(
+    //     db
+    //     .collection('mahasiswa')
+    //     // .find({ nama: 'eris'})
+    //     .find({ _id: ObjectId('6841d71df08627512836ee66') })
+    //     .toArray((error, result) => {
+    //         console.log(result);
+    //     })
+    // );
+
+    // Mengubah data berdasarkan id    
+    const updatePromise = db.collection('mahasiswa').updateOne(
+        {
+            _id: ObjectId('6841d71df08627512836ee66'),
+        },
+        {
+            $set: {
+                nama: 'eris superb',
+            },
+        }
     );
+
+    
 
 });
