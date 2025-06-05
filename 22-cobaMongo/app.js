@@ -81,11 +81,17 @@ client.connect((error, client) => {
         },
         {
             $set: {
-                nama: 'eris superb',
+                nama: 'eris suerb',
             },
         }
     );
 
-    
+    updatePromise
+        .then((result) => {
+            console.log(result);
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+    });
 
-});
