@@ -75,23 +75,49 @@ client.connect((error, client) => {
     // );
 
     // Mengubah data berdasarkan id    
-    const updatePromise = db.collection('mahasiswa').updateOne(
+    // const updatePromise = db.collection('mahasiswa').updateOne(
+    //     {
+    //         _id: ObjectId('6841d71df08627512836ee66'),
+    //     },
+    //     {
+    //         $set: {
+    //             nama: 'eris suerb',
+    //         },
+    //     }
+    // );
+
+    // updatePromise
+    //     .then((result) => {
+    //         console.log(result);
+    //     })
+    //     .catch((error) => {
+    //         console.log(error);
+    //     });
+
+    // mengubah data lebih dari satu bersarkan kriteria
+    db.collection('mahasiswa').updateMany(
         {
-            _id: ObjectId('6841d71df08627512836ee66'),
+            nama: 'ari klon',
         },
         {
             $set: {
-                nama: 'eris suerb',
+                nama: 'osamu dazai',
             },
         }
     );
 
-    updatePromise
-        .then((result) => {
-            console.log(result);
-        })
-        .catch((error) => {
-            console.log(error);
-        });
-    });
+    // db.collection('mahasiswa').updateMany(
+    //     { nama: 'ilham' },
+    //     { $set: { nama: 'ari klon' } },
+    //     (err, res) => {
+    //         if (err) {
+    //             console.error('Update gagal:', err);
+    //         } else {
+    //             console.log('Jumlah dokumen yang diupdate:', res.modifiedCount);
+    //         }
+    //     }
+    // );
+});
+
+    
 
