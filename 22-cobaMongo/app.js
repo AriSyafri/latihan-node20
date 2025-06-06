@@ -119,9 +119,21 @@ client.connect((error, client) => {
     // );
 
     // menghapus 1 data
+    // db.collection('mahasiswa')
+    // .deleteOne({
+    //         _id: ObjectId('68407f04bad840669815ba49')
+    //     })
+    //     .then((result) => {
+    //         console.log(result);
+    //     })
+    //     .catch((error) => {
+    //         console.log(error);
+    //     });
+
+    // menghapus banyak data
     db.collection('mahasiswa')
-    .deleteOne({
-            _id: ObjectId('68407f04bad840669815ba49')
+    .deleteMany({
+            nama: 'eris'
         })
         .then((result) => {
             console.log(result);
