@@ -95,16 +95,16 @@ client.connect((error, client) => {
     //     });
 
     // mengubah data lebih dari satu bersarkan kriteria
-    db.collection('mahasiswa').updateMany(
-        {
-            nama: 'ari klon',
-        },
-        {
-            $set: {
-                nama: 'osamu dazai',
-            },
-        }
-    );
+    // db.collection('mahasiswa').updateMany(
+    //     {
+    //         nama: 'ari klon',
+    //     },
+    //     {
+    //         $set: {
+    //             nama: 'osamu dazai',
+    //         },
+    //     }
+    // );
 
     // db.collection('mahasiswa').updateMany(
     //     { nama: 'ilham' },
@@ -117,6 +117,18 @@ client.connect((error, client) => {
     //         }
     //     }
     // );
+
+    // menghapus 1 data
+    db.collection('mahasiswa')
+    .deleteOne({
+            _id: ObjectId('68407f04bad840669815ba49')
+        })
+        .then((result) => {
+            console.log(result);
+        })
+        .catch((error) => {
+            console.log(error);
+        });
 });
 
     
