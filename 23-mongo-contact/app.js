@@ -155,6 +155,57 @@ app.delete('/contact', (req, res) => {
 });
 
 
+// form ubah data contact
+app.get('/contact/edit/:nama', async (req, res) => {
+
+    const contact = await Contact.findOne({nama: req.params.nama});
+
+    res.render('edit-contact', {
+        title: 'Form ubah data contact',
+        layout: 'layouts/main-layout',
+        contact,
+    });
+});
+
+
+// proses ubah kontak
+app.put('/contact', [
+    body('nama').custom(async (value, { req }) => {
+        const duplikat = await Contact.findOne({nama: value});
+        if(value !== req.body.oldNama && duplikat) {
+            throw new Error('Nama contact sudah digunakan');
+        }
+        return true;
+    }),
+    check('email', 'Email tidak valid').isEmail(),
+    check('nohp', 'No hp tidak valid').isMobilePhone('id-ID'),
+
+], (req, res) => {
+    const errors = validationResult(req);
+    if(!errors.isEmpty()) {
+        res.render('edit-contact', {
+            title: 'Form ubah data contact',
+            layout: 'layouts/main-layout',
+            errors: errors.array(),
+            contact: req.body,
+        });
+    } else {
+        Contact.updateOne({_id: req.body._id },
+            {
+                $set: {
+                    nama: req.body.nama,
+                    email: req.body.email,
+                    nohp: req.body.nohp,
+                },
+            }).then((result) => {
+                req.flash('msg', 'Data contact berhasil diubah');
+                res.redirect('/contact');
+            });
+    }
+});
+
+
+
 // halaman detail contact
 app.get('/contact/:nama', async (req, res) => {
     
