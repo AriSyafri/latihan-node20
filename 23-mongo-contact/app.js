@@ -1,6 +1,14 @@
 const express = require('express');
 const expressLayouts = require('express-ejs-layouts');
 
+const session = require('express-session');
+const cookieParser = require('cookie-parser');
+const flash = require('connect-flash');
+
+require('./utils/db');
+const Contact = require('./model/contact');
+
+
 const app = express();
 const port = 3000;
 
@@ -15,7 +23,20 @@ app.use(expressLayouts);
 app.use(express.static('public')); 
 app.use(express.urlencoded({ extended:true }));
 
+// konfigurasi flash
+app.use(cookieParser('secret'));
 
+app.use(session({
+        cookie: { maxAge: 6000},
+        secret: 'secret',
+        resave: true, 
+        saveUninitialized: true,
+    })
+);
+app.use(flash());
+
+
+// halaman home
 app.get('/', (req, res) => {
 
     const mahasiswa = [
@@ -49,14 +70,23 @@ app.get('/about', (req, res) => {
     );
 });
 
-app.get('/contact', (req, res) => {
-    const contacts = loadContact();
+app.get('/contact', async (req, res) => {
+
+    // Contact.find().then((contact) => {
+    //     res.send(contact);
+    // });
+
+    const contacts = await Contact.find();
+
     res.render('contact', {
         layout: 'layouts/main-layout',
         title: 'contact',
         contacts,
         msg: req.flash('msg'),
     });
+
+
+
 });
 
 
