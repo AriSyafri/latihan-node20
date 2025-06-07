@@ -84,9 +84,19 @@ app.get('/contact', async (req, res) => {
         contacts,
         msg: req.flash('msg'),
     });
+});
 
 
+// halaman detail contact
+app.get('/contact/:nama', async (req, res) => {
+    
+    const contact = await Contact.findOne({ nama: req.params.nama });
 
+    res.render('detail', {
+        title: 'Halaman Detail Contact',
+        layout: 'layouts/main-layout',
+        contact,
+    });
 });
 
 
